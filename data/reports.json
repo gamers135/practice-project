@@ -1,0 +1,27 @@
+{
+    "lost": [
+        {
+            "id": "LF-1784B9",
+            "name": "Gujjar Sai Phanindra",
+            "contact": "1234567890",
+            "item": "iqoo z10x mobile",
+            "description": "it has dragon wallpaper and a transparent case",
+            "location": "near academic block",
+            "date_time": "4 sep 2026 4:30 pm",
+            "verification": "it has black dragon and dirty mobile case",
+            "status": "ACTIVE"
+        }
+    ],
+    "found": [
+        {
+            "id": "FF-4B0F7D",
+            "name": "Arun",
+            "contact": "0987654321",
+            "item": "iqoo z10x mobile",
+            "description": "it has dragon wall paper and transparent case",
+            "location": "near academic block",
+            "date_time": "4 sep 2026 4:30 pm",
+            "status": "ACTIVE"
+        }
+    ]
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>UniFind | Verified</title>
+
+    <style>
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-family: Arial;
+
+            color: white;
+
+            background:
+                radial-gradient(circle at top,
+                    #164e63,
+                    transparent 40%),
+                #071116;
+
+        }
+
+        .box {
+
+            width: 90%;
+
+            max-width: 550px;
+
+            text-align: center;
+
+            padding: 50px 30px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.1);
+
+        }
+
+        .icon {
+
+            font-size: 70px;
+
+            margin-bottom: 20px;
+
+        }
+
+        h1 {
+
+            margin-bottom: 10px;
+
+        }
+
+        p {
+
+            color: #9ca3af;
+
+            line-height: 1.7;
+
+        }
+
+        .item {
+
+            margin: 25px 0;
+
+            padding: 18px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(16, 185, 129, 0.08);
+
+        }
+
+        a {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 13px 22px;
+
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            color: white;
+
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="box">
+
+        <div class="icon">
+            ✅
+        </div>
+
+        <h1>
+            Ownership Verified
+        </h1>
+
+        <p>
+
+            The private verification detail matched
+            the original lost-item report.
+
+        </p>
+
+
+        <div class="item">
+
+            <strong>
+                {{ lost.item }}
+            </strong>
+
+            <br><br>
+
+            {{ lost.location }}
+
+        </div>
+
+
+        <p>
+
+            The university should confirm the identity
+            of the claimant before handing over the item.
+
+        </p>
+
+
+        <a href="/">
+            ← Back to UniFind
+        </a>
+
+    </div>
+
+</body>
+
+</html>

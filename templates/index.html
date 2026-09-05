@@ -1,0 +1,1992 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UniFind | University Lost & Found</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family:
+                Inter,
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            color: #f5f7ff;
+
+            background:
+                radial-gradient(circle at top left,
+                    #293c8f,
+                    transparent 35%),
+                radial-gradient(circle at bottom right,
+                    #6b21a8,
+                    transparent 35%),
+                #080b18;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            background: #4f46e5;
+
+            filter: blur(180px);
+
+            opacity: 0.18;
+
+            top: -200px;
+            right: -150px;
+
+            z-index: -1;
+        }
+
+
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+
+            background: #9333ea;
+
+            filter: blur(180px);
+
+            opacity: 0.15;
+
+            bottom: -200px;
+            left: -150px;
+
+            z-index: -1;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+
+            width: 100%;
+
+            padding: 20px 7%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            backdrop-filter: blur(18px);
+
+            background:
+                rgba(8, 11, 24, 0.72);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+
+        .logo-icon {
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #a855f7);
+
+            box-shadow:
+                0 10px 30px rgba(99, 102, 241, 0.35);
+        }
+
+
+        .nav-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .nav-badge {
+
+            padding: 8px 14px;
+
+            border-radius: 50px;
+
+            font-size: 12px;
+
+            color: #c7d2fe;
+
+            background:
+                rgba(99, 102, 241, 0.12);
+
+            border:
+                1px solid rgba(129, 140, 248, 0.25);
+        }
+
+
+        .matches-link {
+
+            text-decoration: none;
+
+            color: white;
+
+            padding: 9px 15px;
+
+            border-radius: 50px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+            transition: 0.2s;
+        }
+
+
+        .matches-link:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 90px 7% 55px;
+
+            text-align: center;
+        }
+
+
+        .hero-pill {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 14px;
+
+            border-radius: 50px;
+
+            font-size: 12px;
+
+            color: #c4b5fd;
+
+            background:
+                rgba(139, 92, 246, 0.12);
+
+            border:
+                1px solid rgba(167, 139, 250, 0.25);
+
+            margin-bottom: 25px;
+        }
+
+
+        .pulse {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #34d399;
+
+            box-shadow:
+                0 0 12px #34d399;
+        }
+
+
+        .hero h1 {
+
+            font-size:
+                clamp(45px, 7vw, 78px);
+
+            line-height: 0.95;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 25px;
+
+            background:
+                linear-gradient(90deg,
+                    #ffffff,
+                    #c7d2fe,
+                    #d8b4fe);
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .hero p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #9ca3b5;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+
+            max-width: 950px;
+
+            margin: 25px auto 65px;
+
+            padding: 0 7%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .stat {
+
+            padding: 22px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(15px);
+
+            text-align: center;
+        }
+
+
+        .stat-number {
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            margin-bottom: 5px;
+        }
+
+
+        .stat-label {
+
+            font-size: 12px;
+
+            color: #8f96aa;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 0 7% 100px;
+        }
+
+
+        .section-title {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+
+        .section-title h2 {
+
+            font-size: 24px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .section-title span {
+
+            font-size: 12px;
+
+            color: #858ca0;
+        }
+
+
+        /* =========================
+           ACTION CARDS
+        ========================= */
+
+        .actions {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .action-card {
+
+            position: relative;
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(20px);
+        }
+
+
+        .action-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(167, 139, 250, 0.4);
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.25);
+        }
+
+
+        .action-icon {
+
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 15px;
+
+            font-size: 23px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .lost-icon {
+
+            background:
+                rgba(99, 102, 241, 0.18);
+        }
+
+
+        .found-icon {
+
+            background:
+                rgba(16, 185, 129, 0.15);
+        }
+
+
+        .action-card h3 {
+
+            font-size: 20px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .action-card p {
+
+            color: #858ca0;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        .arrow {
+
+            position: absolute;
+
+            right: 25px;
+            bottom: 25px;
+
+            font-size: 20px;
+
+            color: #8b8ff5;
+        }
+
+
+        /* =========================
+           SMART MATCH CARD
+        ========================= */
+
+        .smart-match {
+
+            position: relative;
+
+            padding: 28px 30px;
+
+            margin-bottom: 70px;
+
+            border-radius: 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(135deg,
+                    rgba(99, 102, 241, 0.13),
+                    rgba(168, 85, 247, 0.09));
+
+            border:
+                1px solid rgba(139, 92, 246, 0.2);
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+
+        .smart-match::after {
+
+            content: "✦";
+
+            position: absolute;
+
+            right: 30%;
+
+            top: 15px;
+
+            font-size: 25px;
+
+            color: rgba(255, 255, 255, 0.08);
+
+            animation:
+                float 3s ease-in-out infinite;
+        }
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+
+        .smart-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+        }
+
+
+        .smart-icon {
+
+            width: 52px;
+            height: 52px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 16px;
+
+            font-size: 24px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+
+        .smart-match h3 {
+
+            font-size: 18px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .smart-match p {
+
+            color: #9299ad;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        .smart-button {
+
+            flex-shrink: 0;
+
+            text-decoration: none;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            padding: 13px 19px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+            transition: 0.2s;
+        }
+
+
+        .smart-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 30px rgba(99, 102, 241, 0.3);
+        }
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        .search {
+
+            width: 100%;
+
+            padding: 15px 18px;
+
+            margin-bottom: 20px;
+
+            border-radius: 15px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255, 255, 255, 0.04);
+
+            color: white;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+
+        .search:focus {
+
+            border-color:
+                rgba(129, 140, 248, 0.5);
+        }
+
+
+        /* =========================
+           REPORTS
+        ========================= */
+
+        .reports {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .report {
+
+            padding: 24px;
+
+            border-radius: 22px;
+
+            background:
+                rgba(255, 255, 255, 0.04);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            transition: 0.25s;
+        }
+
+
+        .report:hover {
+
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(255, 255, 255, 0.065);
+        }
+
+
+        .report-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 17px;
+        }
+
+
+        .type {
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            padding: 6px 10px;
+
+            border-radius: 50px;
+        }
+
+
+        .type-lost {
+
+            color: #a5b4fc;
+
+            background:
+                rgba(99, 102, 241, 0.15);
+        }
+
+
+        .type-found {
+
+            color: #6ee7b7;
+
+            background:
+                rgba(16, 185, 129, 0.12);
+        }
+
+
+        .status {
+
+            font-size: 10px;
+
+            color: #9ca3af;
+        }
+
+
+        .report h3 {
+
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .description {
+
+            color: #8e95a8;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-bottom: 18px;
+        }
+
+
+        .meta {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            font-size: 12px;
+
+            color: #8f96aa;
+        }
+
+
+        .report-id {
+
+            margin-top: 18px;
+
+            padding-top: 14px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.06);
+
+            color: #646b7e;
+
+            font-size: 10px;
+
+            font-family: monospace;
+        }
+
+
+        /* =========================
+           SECURITY
+        ========================= */
+
+        .security {
+
+            margin-top: 70px;
+
+            padding: 28px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(135deg,
+                    rgba(99, 102, 241, 0.1),
+                    rgba(168, 85, 247, 0.07));
+
+            border:
+                1px solid rgba(129, 140, 248, 0.15);
+
+            text-align: center;
+        }
+
+
+        .security h3 {
+
+            margin-bottom: 8px;
+        }
+
+
+        .security p {
+
+            max-width: 600px;
+
+            margin: auto;
+
+            color: #8f96aa;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #555c70;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0, 0, 0, 0.72);
+
+            backdrop-filter: blur(10px);
+
+            z-index: 999;
+        }
+
+
+        .modal.active {
+
+            display: flex;
+        }
+
+
+        .modal-box {
+
+            width: 100%;
+
+            max-width: 500px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            background:
+                #111526;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.1);
+
+            box-shadow:
+                0 30px 100px rgba(0, 0, 0, 0.5);
+
+            animation:
+                popup 0.25s ease;
+        }
+
+
+        @keyframes popup {
+
+            from {
+
+                transform:
+                    scale(0.9);
+
+                opacity: 0;
+            }
+
+            to {
+
+                transform:
+                    scale(1);
+
+                opacity: 1;
+            }
+        }
+
+
+        .modal-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .close {
+
+            cursor: pointer;
+
+            font-size: 24px;
+
+            color: #777e91;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 15px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-size: 11px;
+
+            color: #8f96aa;
+
+            margin-bottom: 7px;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .form-group input,
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255, 255, 255, 0.04);
+
+            color: white;
+
+            outline: none;
+
+            font-family: inherit;
+        }
+
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+
+            border-color:
+                rgba(129, 140, 248, 0.5);
+        }
+
+
+        .form-group textarea {
+
+            resize: vertical;
+
+            min-height: 80px;
+        }
+
+
+        .submit {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            color: white;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+            transition: 0.2s;
+        }
+
+
+        .submit:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 30px rgba(99, 102, 241, 0.3);
+        }
+
+
+        .private-note {
+
+            margin-top: 10px;
+
+            padding: 10px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(245, 158, 11, 0.08);
+
+            color: #d6b76a;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .stats,
+            .actions,
+            .reports {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .hero {
+
+                padding-top: 60px;
+            }
+
+
+            .hero h1 {
+
+                letter-spacing: -2px;
+            }
+
+
+            .nav-badge {
+
+                display: none;
+            }
+
+
+            .smart-match {
+
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+
+            .smart-button {
+
+                text-align: center;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+     NAVBAR
+========================= -->
+
+    <nav>
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🎒
+            </div>
+
+            UniFind
+
+        </div>
+
+
+        <div class="nav-right">
+
+            <a class="matches-link" href="/matches">
+                🧠 Smart Matches
+            </a>
+
+            <div class="nav-badge">
+                Campus Lost & Found
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+     HERO
+========================= -->
+
+    <section class="hero">
+
+        <div class="hero-pill">
+
+            <span class="pulse"></span>
+
+            Built for your campus
+
+        </div>
+
+
+        <h1>
+
+            Lost something?<br>
+
+            Let's find it.
+
+        </h1>
+
+
+        <p>
+
+            UniFind connects students who lost items
+            with those who found them — while keeping
+            ownership verification private and secure.
+
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+     STATS
+========================= -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-number">
+                {{ lost|length }}
+            </div>
+
+            <div class="stat-label">
+                Lost Reports
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-number">
+                {{ found|length }}
+            </div>
+
+            <div class="stat-label">
+                Found Reports
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-number">
+                {{ lost|length + found|length }}
+            </div>
+
+            <div class="stat-label">
+                Total Reports
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+     MAIN
+========================= -->
+
+    <main class="container">
+
+
+        <div class="section-title">
+
+            <h2>
+                What happened?
+            </h2>
+
+            <span>
+                Choose an action
+            </span>
+
+        </div>
+
+
+        <!-- ACTION CARDS -->
+
+        <div class="actions">
+
+
+            <!-- LOST -->
+
+            <div class="action-card" onclick="openModal('lostModal')">
+
+                <div class="action-icon lost-icon">
+                    🔎
+                </div>
+
+
+                <h3>
+                    I lost something
+                </h3>
+
+
+                <p>
+
+                    Tell us what you lost and where.
+                    We'll help find possible matches.
+
+                </p>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <!-- FOUND -->
+
+            <div class="action-card" onclick="openModal('foundModal')">
+
+                <div class="action-icon found-icon">
+                    🎒
+                </div>
+
+
+                <h3>
+                    I found something
+                </h3>
+
+
+                <p>
+
+                    Report an item you found on campus
+                    and help return it to its owner.
+
+                </p>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================
+         SMART MATCH
+    ========================= -->
+
+        <div class="smart-match">
+
+
+            <div class="smart-left">
+
+                <div class="smart-icon">
+                    🧠
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Smart Matching
+                    </h3>
+
+
+                    <p>
+
+                        UniFind compares item details,
+                        descriptions and locations to
+                        discover possible matches.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a class="smart-button" href="/matches">
+
+                View Smart Matches →
+
+            </a>
+
+
+        </div>
+
+
+        <!-- =========================
+         REPORTS
+    ========================= -->
+
+        <div class="section-title">
+
+            <h2>
+                Recent reports
+            </h2>
+
+            <span>
+                Public information only
+            </span>
+
+        </div>
+
+
+        <input class="search" id="search" type="text" placeholder="🔍  Search items, locations..."
+            onkeyup="searchReports()">
+
+
+        <div class="reports" id="reports">
+
+
+            <!-- LOST REPORTS -->
+
+            {% for report in lost %}
+
+
+            <div class="report" data-search="
+                {{ report.item }}
+                {{ report.description }}
+                {{ report.location }}
+            ">
+
+
+                <div class="report-top">
+
+                    <span class="type type-lost">
+                        LOST
+                    </span>
+
+
+                    <span class="status">
+
+                        ● {{ report.status }}
+
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    {{ report.item }}
+                </h3>
+
+
+                <p class="description">
+
+                    {{ report.description }}
+
+                </p>
+
+
+                <div class="meta">
+
+                    <span>
+                        📍 {{ report.location }}
+                    </span>
+
+
+                    <span>
+                        🕒 {{ report.date_time }}
+                    </span>
+
+                </div>
+
+
+                <div class="report-id">
+
+                    {{ report.id }}
+
+                </div>
+
+            </div>
+
+
+            {% endfor %}
+
+
+            <!-- FOUND REPORTS -->
+
+            {% for report in found %}
+
+
+            <div class="report" data-search="
+                {{ report.item }}
+                {{ report.description }}
+                {{ report.location }}
+            ">
+
+
+                <div class="report-top">
+
+                    <span class="type type-found">
+                        FOUND
+                    </span>
+
+
+                    <span class="status">
+
+                        ● {{ report.status }}
+
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    {{ report.item }}
+                </h3>
+
+
+                <p class="description">
+
+                    {{ report.description }}
+
+                </p>
+
+
+                <div class="meta">
+
+                    <span>
+                        📍 {{ report.location }}
+                    </span>
+
+
+                    <span>
+                        🕒 {{ report.date_time }}
+                    </span>
+
+                </div>
+
+
+                <div class="report-id">
+
+                    {{ report.id }}
+
+                </div>
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+        <!-- =========================
+         SECURITY
+    ========================= -->
+
+        <div class="security">
+
+            <h3>
+                🔐 Ownership comes first
+            </h3>
+
+
+            <p>
+
+                Contact information and private verification
+                details are never displayed publicly.
+                Possible matches are verified before an item
+                is returned.
+
+            </p>
+
+        </div>
+
+
+    </main>
+
+
+    <footer>
+
+        UniFind · University Lost & Found MVP · Built for campus
+
+    </footer>
+
+
+
+    <!-- =========================
+     LOST MODAL
+========================= -->
+
+    <div class="modal" id="lostModal" onclick="closeOutside(event, 'lostModal')">
+
+
+        <div class="modal-box">
+
+
+            <div class="modal-header">
+
+                <h2>
+                    🔎 Report Lost Item
+                </h2>
+
+
+                <span class="close" onclick="closeModal('lostModal')">
+                    ×
+                </span>
+
+            </div>
+
+
+            <form action="/report-lost" method="POST">
+
+
+                <div class="form-group">
+
+                    <label>
+                        YOUR NAME
+                    </label>
+
+                    <input type="text" name="name" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        CONTACT
+                    </label>
+
+                    <input type="text" name="contact" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        ITEM
+                    </label>
+
+                    <input type="text" name="item" placeholder="e.g. iPhone 15" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        DESCRIPTION
+                    </label>
+
+                    <textarea name="description" placeholder="Describe visible details..." required></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        WHERE?
+                    </label>
+
+                    <input type="text" name="location" placeholder="e.g. University Library" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        WHEN?
+                    </label>
+
+                    <input type="text" name="date_time" placeholder="Date and approximate time" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        PRIVATE VERIFICATION DETAIL
+                    </label>
+
+                    <input type="text" name="verification" placeholder="Something only the owner knows" required>
+
+
+                    <div class="private-note">
+
+                        🔐 This information is private and
+                        will not appear in public reports.
+
+                    </div>
+
+                </div>
+
+
+                <button class="submit" type="submit">
+
+                    Submit Lost Report →
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+     FOUND MODAL
+========================= -->
+
+    <div class="modal" id="foundModal" onclick="closeOutside(event, 'foundModal')">
+
+
+        <div class="modal-box">
+
+
+            <div class="modal-header">
+
+                <h2>
+                    🎒 Report Found Item
+                </h2>
+
+
+                <span class="close" onclick="closeModal('foundModal')">
+                    ×
+                </span>
+
+            </div>
+
+
+            <form action="/report-found" method="POST">
+
+
+                <div class="form-group">
+
+                    <label>
+                        YOUR NAME
+                    </label>
+
+                    <input type="text" name="name" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        CONTACT
+                    </label>
+
+                    <input type="text" name="contact" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        ITEM
+                    </label>
+
+                    <input type="text" name="item" placeholder="e.g. Black backpack" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        DESCRIPTION
+                    </label>
+
+                    <textarea name="description" placeholder="Describe the item..." required></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        WHERE DID YOU FIND IT?
+                    </label>
+
+                    <input type="text" name="location" placeholder="e.g. Block A" required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        WHEN?
+                    </label>
+
+                    <input type="text" name="date_time" placeholder="Date and approximate time" required>
+
+                </div>
+
+
+                <button class="submit" type="submit">
+
+                    Submit Found Report →
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        // =========================
+        // OPEN MODAL
+        // =========================
+
+        function openModal(id) {
+
+            document
+                .getElementById(id)
+                .classList
+                .add("active");
+
+        }
+
+
+        // =========================
+        // CLOSE MODAL
+        // =========================
+
+        function closeModal(id) {
+
+            document
+                .getElementById(id)
+                .classList
+                .remove("active");
+
+        }
+
+
+        // =========================
+        // CLOSE OUTSIDE MODAL
+        // =========================
+
+        function closeOutside(event, id) {
+
+            if (event.target.id === id) {
+
+                closeModal(id);
+
+            }
+
+        }
+
+
+        // =========================
+        // SEARCH REPORTS
+        // =========================
+
+        function searchReports() {
+
+            const query =
+                document
+                    .getElementById("search")
+                    .value
+                    .toLowerCase();
+
+
+            const reports =
+                document
+                    .querySelectorAll(".report");
+
+
+            reports.forEach(report => {
+
+                const text =
+                    report
+                        .dataset
+                        .search
+                        .toLowerCase();
+
+
+                if (text.includes(query)) {
+
+                    report.style.display = "block";
+
+                }
+
+                else {
+
+                    report.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+
+        // =========================
+        // ESCAPE KEY
+        // =========================
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+
+                    closeModal("lostModal");
+
+                    closeModal("foundModal");
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
+
